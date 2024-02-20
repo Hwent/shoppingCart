@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import localForage from "localforage";
 import ProductCard from "./ProductCard";
 const useFakeProducts = () => {
   const [products, setProducts] = useState([]);
@@ -6,22 +7,30 @@ const useFakeProducts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=16")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Error: " + response.status);
-        }
-      })
-      .then((data) => {
-        setProducts(data);
+    localForage.getItem("products").then((savedProducts) => {
+      if (savedProducts) {
+        setProducts(savedProducts);
         setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
+      } else {
+        fetch("https://fakestoreapi.com/products?limit=16")
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Error: " + response.status);
+            }
+          })
+          .then((data) => {
+            setProducts(data);
+            localForage.setItem("products", data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            setError(error.message);
+            setLoading(false);
+          });
+      }
+    });
   }, []);
 
   return { products, loading, error };
