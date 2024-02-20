@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import ProductCard from "./ProductCard";
 const useFakeProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +37,7 @@ export default function Products() {
     <div>
       <ul>
         {products.map((product) => (
-          <li key={product.id}>{product.title}</li>
+          <ProductCard key={product.id} product={product} />
         ))}
       </ul>
     </div>
