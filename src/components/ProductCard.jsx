@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 
+import AddCartbtn from "./AddCartbtn";
 export default function ProductCard({ product }) {
   return (
     <div css={styles.card}>
@@ -10,7 +11,7 @@ export default function ProductCard({ product }) {
       </Link>
       <h3 css={styles.title}>{product.name}</h3>
       <p css={styles.price}>${product.price}</p>
-      <button css={styles.button}>Add to cart</button>
+      <AddCartbtn product={product} css={styles.button} />
     </div>
   );
 }

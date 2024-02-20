@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import localforage from "localforage";
-
+import AddCartbtn from "../components/AddCartbtn";
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,12 @@ export default function ProductPage() {
       <img src={product.image} alt={product.title} />
       <p>{product.description}</p>
       <p>${product.price}</p>
-      <button>Add to cart</button>
+      <div>
+        amount: <input type="number" />
+        <button>+</button>
+        <button>-</button>
+      </div>
+      <AddCartbtn product={product} />
     </div>
   );
 }

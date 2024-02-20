@@ -29,10 +29,10 @@ export default function Navbar() {
           Shop
         </NavLink>
         <NavLink
-          to="/login"
+          to="/Cart"
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          Login
+          Cart
         </NavLink>
       </Toolbar>
     </AppBar>

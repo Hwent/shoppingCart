@@ -6,6 +6,8 @@ import ShopPage from "./pages/ShopPage";
 import Navbar from "./components/Navbar";
 import ErrorPage from "./pages/ErrorPage";
 import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
