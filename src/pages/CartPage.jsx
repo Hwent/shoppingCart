@@ -10,6 +10,7 @@ import {
   Button,
   Box,
   IconButton,
+  Typography,
 } from "@mui/material";
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 
@@ -30,6 +31,10 @@ export default function CartPage() {
     setLoading(false);
     window.dispatchEvent(new Event("cartUpdated"));
   };
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.amount,
+    0
+  );
 
   return (
     <div>
@@ -104,6 +109,10 @@ export default function CartPage() {
           ))}
         </List>
       )}
+      <Typography variant="h6">
+        Total Price: ${totalPrice.toFixed(2)}
+      </Typography>
+      <br />
       <Button
         variant="contained"
         color="primary"
