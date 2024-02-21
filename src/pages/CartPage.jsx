@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import localforage from "localforage";
+
 export default function CartPage() {
   const [cart, setCart] = useState([]);
-  localforage.getItem("cart").then((cart) => {
-    setCart(cart || []);
-  });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    localforage.getItem("cart").then((cart) => {
+      setCart(cart || []);
+    });
+  }, []);
+
+  const handleClear = async () => {
+    setLoading(true);
+    await localforage.removeItem("cart");
+    setCart([]);
+    setLoading(false);
+  };
+
   return (
     <div>
       <h1>Your Shopping Cart</h1>
@@ -14,26 +27,14 @@ export default function CartPage() {
         <ul>
           {cart.map((product) => (
             <li key={product.id}>
-              {product.title} - ${product.price}
+              {product.title} - Price: ${product.price} - Quantity:{" "}
+              {product.amount}
             </li>
           ))}
         </ul>
       )}
-      <button
-        onClick={() =>
-          localforage
-            .removeItem("cart")
-            .then(function () {
-              // Run this code once the key has been removed.
-              console.log("Key is cleared!");
-            })
-            .catch(function (err) {
-              // This code runs if there were any errors
-              console.log(err);
-            })
-        }
-      >
-        clear
+      <button onClick={handleClear} disabled={loading}>
+        Clear
       </button>
     </div>
   );

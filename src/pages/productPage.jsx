@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import localforage from "localforage";
 import AddCartbtn from "../components/AddCartbtn";
+import ProductQuantityController from "../components/ProductQuantityController";
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,6 +42,9 @@ export default function ProductPage() {
   const { productId } = useParams();
   const { product, loading } = useProduct(productId);
 
+  //Qunatity of product to cart
+  const [amount, setAmount] = useState(1);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -51,12 +55,8 @@ export default function ProductPage() {
       <img src={product.image} alt={product.title} />
       <p>{product.description}</p>
       <p>${product.price}</p>
-      <div>
-        amount: <input type="number" />
-        <button>+</button>
-        <button>-</button>
-      </div>
-      <AddCartbtn product={product} />
+      <ProductQuantityController amount={amount} setAmount={setAmount} />
+      <AddCartbtn product={product} amount={amount} />
     </div>
   );
 }
