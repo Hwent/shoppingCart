@@ -1,8 +1,18 @@
-# React + Vite
+# Mock Shopping Cart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a mock shopping cart application using client-side routing.
+It is a simple application that allows users to add items to a shopping cart and view the items in the cart. The application is built using the following technologies:
 
-Currently, two official plugins are available:
+- [React](https://reactjs.org/)
+- [React Router](https://reactrouter.com/)
+- [Vite](https://vitejs.dev/)
+- [Material-UI](https://material-ui.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+
+To install the application, clone the repository and run the following commands:
+
+```bash
+npm install
+npm run dev
+```
