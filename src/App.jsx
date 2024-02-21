@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import Navbar from "./components/Navbar";
-import Footer from "./components/foot";
+import Footer from "./components/Footer";
 import ErrorPage from "./pages/ErrorPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";

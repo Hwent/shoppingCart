@@ -5,6 +5,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import localforage from "localforage";
 import { useState, useEffect } from "react";
+import logo from "../assets/shopping.svg";
 
 const useCartItems = () => {
   const [cartItems, setCartItems] = useState(0);
@@ -29,7 +30,7 @@ export default function Navbar({ mode, setMode }) {
     <AppBar position="static">
       <Toolbar>
         <Box display="flex" flexGrow={1}>
-          <img className="logo" src="/src/assets/Shopping.svg" alt="logo" />
+          <img className="logo" src={logo} alt="logo" />
         </Box>
 
         <NavLink
