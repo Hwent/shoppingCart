@@ -1,5 +1,19 @@
 import { useState, useEffect } from "react";
 import localforage from "localforage";
+import { NavLink } from "react-router-dom";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton,
+  ListItemAvatar,
+  Avatar,
+  Button,
+  Box,
+  IconButton,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function CartPage() {
   const [cart, setCart] = useState([]);
@@ -24,18 +38,80 @@ export default function CartPage() {
       {cart.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
-        <ul>
+        <List>
           {cart.map((product) => (
-            <li key={product.id}>
-              {product.title} - Price: ${product.price} - Quantity:{" "}
-              {product.amount}
-            </li>
+            <ListItem key={product.id}>
+              <ListItemAvatar>
+                <Avatar alt={product.title} src={product.image} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={product.title}
+                secondary={`Price: $${product.price}`}
+              />
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="center"
+                gap={1}
+                flex={1}
+              >
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    if (product.amount > 1) {
+                      const newCart = cart.map((p) =>
+                        p.id === product.id ? { ...p, amount: p.amount - 1 } : p
+                      );
+                      localforage.setItem("cart", newCart);
+                      setCart(newCart);
+                    }
+                  }}
+                >
+                  <RemoveIcon />
+                </IconButton>
+                {product.amount}
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    const newCart = cart.map((p) =>
+                      p.id === product.id ? { ...p, amount: p.amount + 1 } : p
+                    );
+                    localforage.setItem("cart", newCart);
+                    setCart(newCart);
+                  }}
+                >
+                  <AddIcon />
+                </IconButton>
+                <NavLink
+                  to={`/product/${product.id}`}
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  View
+                </NavLink>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    const newCart = cart.filter((p) => p.id !== product.id);
+                    localforage.setItem("cart", newCart);
+                    setCart(newCart);
+                  }}
+                >
+                  Remove
+                </Button>
+              </Box>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-      <button onClick={handleClear} disabled={loading}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleClear}
+        disabled={loading}
+      >
         Clear
-      </button>
+      </Button>
     </div>
   );
 }

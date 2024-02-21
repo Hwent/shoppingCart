@@ -1,5 +1,6 @@
 import { useState } from "react";
 import localforage from "localforage";
+import { Button } from "@mui/material";
 
 export default function AddCartbtn({ product, amount = 1 }) {
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,8 @@ export default function AddCartbtn({ product, amount = 1 }) {
   };
 
   return (
-    <button onClick={handleClick} disabled={loading}>
+    <Button variant="contained" onClick={handleClick} disabled={loading}>
       Add to Cart
-    </button>
+    </Button>
   );
 }
