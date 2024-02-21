@@ -4,7 +4,7 @@ import AddCartbtn from "./AddCartbtn";
 
 export default function ProductCard({ product }) {
   return (
-    <Card sx={{ maxWidth: 345, m: 2 }}>
+    <Card>
       <Link to={`/product/${product.id}`}>
         <CardMedia
           component="img"
