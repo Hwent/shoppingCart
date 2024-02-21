@@ -1,7 +1,10 @@
+import { TextField } from "@mui/material";
+
 export default function ProductQuantityController({ amount, setAmount }) {
   return (
     <div>
-      <input
+      <TextField
+        label="Quantity"
         type="number"
         id="amount"
         min={1}
@@ -11,8 +14,6 @@ export default function ProductQuantityController({ amount, setAmount }) {
           setAmount(Number.isNaN(value) ? 1 : Math.max(1, value));
         }}
       />
-      <button onClick={() => setAmount(amount + 1)}>+</button>
-      <button onClick={() => setAmount(Math.max(1, amount - 1))}>-</button>
     </div>
   );
 }

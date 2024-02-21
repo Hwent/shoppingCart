@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import localforage from "localforage";
 import AddCartbtn from "../components/AddCartbtn";
 import ProductQuantityController from "../components/ProductQuantityController";
+import { Box, Typography, Chip, Rating } from "@mui/material";
+import { CenterFocusStrong } from "@mui/icons-material";
+
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -42,7 +45,7 @@ export default function ProductPage() {
   const { productId } = useParams();
   const { product, loading } = useProduct(productId);
 
-  //Qunatity of product to cart
+  // Quantity of product to cart
   const [amount, setAmount] = useState(1);
 
   if (loading) {
@@ -50,13 +53,35 @@ export default function ProductPage() {
   }
 
   return (
-    <div>
-      <h1>{product.title}</h1>
-      <img src={product.image} alt={product.title} />
-      <p>{product.description}</p>
-      <p>${product.price}</p>
+    <Box sx={{ m: 2 }}>
+      <Typography variant="h4" component="div" gutterBottom>
+        {product.title}
+      </Typography>
+      <Box
+        component="img"
+        src={product.image}
+        alt={product.title}
+        sx={{ maxWidth: 500, maxHeight: 500 }}
+      />
+      <Box
+        alignItems="center"
+        display="flex"
+        justifyContent="center"
+        sx={{ my: 3 }}
+      >
+        <Chip label={product.category} color="primary" />
+        <Rating name="read-only" value={product.rating.rate} readOnly />
+      </Box>
+      <Typography variant="body1" gutterBottom>
+        {product.description}
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        ${product.price}
+      </Typography>
       <ProductQuantityController amount={amount} setAmount={setAmount} />
-      <AddCartbtn product={product} amount={amount} />
-    </div>
+      <Box sx={{ mt: 2 }}>
+        <AddCartbtn product={product} amount={amount} />
+      </Box>
+    </Box>
   );
 }
