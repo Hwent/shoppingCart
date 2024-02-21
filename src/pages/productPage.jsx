@@ -4,7 +4,6 @@ import localforage from "localforage";
 import AddCartbtn from "../components/AddCartbtn";
 import ProductQuantityController from "../components/ProductQuantityController";
 import { Box, Typography, Chip, Rating } from "@mui/material";
-import { CenterFocusStrong } from "@mui/icons-material";
 
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);

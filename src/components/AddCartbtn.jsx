@@ -17,6 +17,7 @@ export default function AddCartbtn({ product, amount = 1 }) {
     }
 
     await localforage.setItem("cart", cart);
+    window.dispatchEvent(new Event("cartUpdated"));
     setLoading(false);
   };
 

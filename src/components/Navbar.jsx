@@ -8,10 +8,17 @@ import { useState, useEffect } from "react";
 
 const useCartItems = () => {
   const [cartItems, setCartItems] = useState(0);
-  useEffect(() => {
+  const updateCartItems = () => {
     localforage.getItem("cart").then((cart) => {
       setCartItems(cart ? cart.length : 0);
     });
+  };
+  useEffect(() => {
+    updateCartItems();
+    window.addEventListener("cartUpdated", updateCartItems);
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartItems);
+    };
   }, []);
   return cartItems;
 };

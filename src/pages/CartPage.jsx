@@ -29,6 +29,7 @@ export default function CartPage() {
     await localforage.removeItem("cart");
     setCart([]);
     setLoading(false);
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   return (
@@ -90,10 +91,11 @@ export default function CartPage() {
                 <Button
                   variant="contained"
                   color="secondary"
-                  onClick={() => {
+                  onClick={async () => {
                     const newCart = cart.filter((p) => p.id !== product.id);
-                    localforage.setItem("cart", newCart);
+                    await localforage.setItem("cart", newCart);
                     setCart(newCart);
+                    window.dispatchEvent(new Event("cartUpdated"));
                   }}
                 >
                   Remove
